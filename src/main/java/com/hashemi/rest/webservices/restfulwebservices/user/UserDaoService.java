@@ -27,7 +27,7 @@ public class UserDaoService {
                 .stream()
                 .filter(user -> user.getId().equals(id))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new UserNotFountException("id: " + id));
     }
 
     public User save(User user) {

@@ -10,11 +10,12 @@ import java.util.List;
 public class UserDaoService {
 
     private static List<User> users = new ArrayList<>();
+    private static Integer userCount = 0;
 
     static {
-        users.add(new User(1, "Mohammad", LocalDate.now().minusYears(30)));
-        users.add(new User(2, "Reza", LocalDate.now().minusYears(25)));
-        users.add(new User(3, "Ali", LocalDate.now().minusYears(20)));
+        users.add(new User(++userCount, "Mohammad", LocalDate.now().minusYears(30)));
+        users.add(new User(++userCount, "Reza", LocalDate.now().minusYears(25)));
+        users.add(new User(++userCount, "Ali", LocalDate.now().minusYears(20)));
     }
 
     public List<User> findAll() {
@@ -27,5 +28,11 @@ public class UserDaoService {
                 .filter(user -> user.getId().equals(id))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public User save(User user) {
+        user.setId(++userCount);
+        users.add(user);
+        return user;
     }
 }

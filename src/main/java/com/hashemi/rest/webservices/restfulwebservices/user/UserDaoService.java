@@ -20,4 +20,12 @@ public class UserDaoService {
     public List<User> findAll() {
         return users;
     }
+
+    public User find(Integer id) {
+        return users
+                .stream()
+                .filter(user -> user.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
 }

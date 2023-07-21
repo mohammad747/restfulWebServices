@@ -1,5 +1,6 @@
 package com.hashemi.rest.webservices.restfulwebservices.user;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +24,9 @@ public class UserResource {
     }
 
     @PostMapping("/users")
-    public void createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@RequestBody User user) {
         userDaoService.save(user);
+        return ResponseEntity.created(null).build();
     }
 
 }
